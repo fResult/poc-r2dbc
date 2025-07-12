@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS customer (
+    id    SERIAL  NOT NULL PRIMARY KEY,
+    email VARCHAR NOT NULL
+);
+
+TRUNCATE customer;

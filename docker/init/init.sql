@@ -1,0 +1,19 @@
+-- For Learning R2DBC with Kotlin
+
+-- CREATE ROLE orders WITH LOGIN PASSWORD '0rd3rz';
+-- ALTER ROLE orders CREATEDB;
+-- CREATE DATABASE orders;
+
+DO
+$$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = '${ORDERS_USER}') THEN
+        CREATE ROLE ${ORDERS_USER} WITH LOGIN PASSWORD '${ORDERS_PASSWORD}';
+        ALTER ROLE orders CREATEDB;
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM pg_database WHERE datname = '${ORDERS_PASSWORD}') THEN
+        CREATE DATABASE orders;
+    END IF;
+END
+$$;

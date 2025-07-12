@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: POC R2DBC (Spring Data)
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5433/orders
+    username: ${PG_USER}
+    password: ${PG_PASSWORD}
+  sql:
+    init:
+      data-locations: classpath:schema.sql
+      mode: always

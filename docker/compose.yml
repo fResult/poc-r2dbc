@@ -1,0 +1,15 @@
+services:
+  kotlin-r2dbc-common:
+    image: postgres:17.5-alpine
+    container_name: r2dbc-orders-db
+    env_file:
+      - ../.env # When run docker-compose from current directory
+#      - ./kotlin/06-data-access/1-r2dbc-common/.env # When run docker-compose from root directory
+    environment:
+      - 'POSTGRES_DB=orders'
+      - 'POSTGRES_USER=${PG_USER}'
+      - 'POSTGRES_PASSWORD=${PG_PASSWORD}'
+    ports:
+      - '5433:5432'
+#    volumes:
+#      - ./docker/init:/docker-entrypoint-initdb.d
