@@ -11,7 +11,7 @@ import java.util.function.Predicate
 
 @Service
 class CustomerService(
-  @Qualifier("commonCustomerRepository") private val repository: SimpleCustomerRepository,
+  private val repository: SimpleCustomerRepository,
   private val operator: TransactionalOperator,
   private val dbInitializer: CustomerDatabaseInitializer,
 ) {

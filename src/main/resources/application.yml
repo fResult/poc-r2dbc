@@ -3,3 +3,8 @@ spring:
     default: common
   main:
     allow-bean-definition-overriding: true
+
+#logging:
+#  level:
+#    root: INFO
+#    org.springframework.boot.autoconfigure: DEBUG

@@ -1,13 +1,15 @@
 package com.fResult.poc_r2dbc.repositories.common
 
 import com.fResult.poc_r2dbc.Customer
+import org.springframework.context.annotation.Profile
 import org.springframework.r2dbc.core.DatabaseClient
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
-@Repository("commonCustomerRepository")
-class CustomerRepository(private val dbClient: DatabaseClient) : SimpleCustomerRepository {
+@Repository
+@Profile("common")
+class CommonCustomerRepository(private val dbClient: DatabaseClient) : SimpleCustomerRepository {
   private val rowMapper: (Map<String, Any>) -> Customer = { row -> Customer(row["id"] as Int, row["email"] as String) }
 
   override fun save(customer: Customer): Mono<Customer> {
