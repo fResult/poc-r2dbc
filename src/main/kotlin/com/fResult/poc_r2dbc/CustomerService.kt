@@ -2,6 +2,7 @@ package com.fResult.poc_r2dbc
 
 import com.fResult.poc_r2dbc.repositories.common.SimpleCustomerRepository
 import org.reactivestreams.Publisher
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 import org.springframework.transaction.reactive.TransactionalOperator
 import reactor.core.publisher.Flux
@@ -10,7 +11,7 @@ import java.util.function.Predicate
 
 @Service
 class CustomerService(
-  private val repository: SimpleCustomerRepository,
+  @Qualifier("commonCustomerRepository") private val repository: SimpleCustomerRepository,
   private val operator: TransactionalOperator,
   private val dbInitializer: CustomerDatabaseInitializer,
 ) {

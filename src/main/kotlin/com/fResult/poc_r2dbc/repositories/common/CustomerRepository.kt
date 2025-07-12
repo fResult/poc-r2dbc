@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
-@Repository
+@Repository("commonCustomerRepository")
 class CustomerRepository(private val dbClient: DatabaseClient) : SimpleCustomerRepository {
   private val rowMapper: (Map<String, Any>) -> Customer = { row -> Customer(row["id"] as Int, row["email"] as String) }
 

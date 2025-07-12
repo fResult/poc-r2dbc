@@ -2,12 +2,16 @@ package com.fResult.poc_r2dbc.repositories.springdata
 
 import com.fResult.poc_r2dbc.Customer
 import com.fResult.poc_r2dbc.repositories.common.SimpleCustomerRepository
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Repository
-class SpringDataCustomerRepository(private val repository: CustomerRepository) : SimpleCustomerRepository {
+class SpringDataCustomerRepository(
+  @Qualifier("springDataCustomerRepository") private val repository: CustomerRepository,
+) :
+  SimpleCustomerRepository {
   override fun save(customer: Customer): Mono<Customer> = repository.save(customer)
 
   override fun findAll(): Flux<Customer> = repository.findAll()
