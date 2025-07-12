@@ -41,7 +41,7 @@ class SpringDataCustomerRepository(
 
   override fun update(customer: Customer): Mono<Customer> = repository.save(customer)
 
-  override fun findById(id: Int): Mono<Customer> = repository.findById(id)
+  override fun findById(id: String): Mono<Customer> = repository.findById(id)
 
-  override fun deleteById(id: Int): Mono<Void> = repository.deleteById(id)
+  override fun deleteById(id: String): Mono<Void> = repository.deleteById(id)
 }

@@ -23,7 +23,7 @@ class CustomerController(private val repository: SimpleCustomerRepository) {
   }
 
   @GetMapping("/{id}")
-  fun byId(@PathVariable id: Int): Mono<ResponseEntity<Customer>> {
+  fun byId(@PathVariable id: String): Mono<ResponseEntity<Customer>> {
     return Mono.just(id)
       .flatMap(repository::findById)
       .map { customer -> ResponseEntity.ok(customer) }
@@ -39,14 +39,14 @@ class CustomerController(private val repository: SimpleCustomerRepository) {
   }
 
   @PatchMapping("/{id}")
-  fun update(@PathVariable id: Int, @RequestBody customer: Customer): Mono<Customer> {
+  fun update(@PathVariable id: String, @RequestBody customer: Customer): Mono<Customer> {
     return Mono.just(id).flatMap(repository::findById)
       .flatMap { exists -> repository.save(Customer(exists.id, customer.email)) }
       .switchIfEmpty(Mono.error(IllegalArgumentException("Customer with id [${id}] not found")))
   }
 
   @DeleteMapping("/{id}")
-  fun delete(@PathVariable id: Int): Mono<Void> {
+  fun delete(@PathVariable id: String): Mono<Void> {
     return Mono.just(id).flatMap(repository::deleteById)
   }
 }

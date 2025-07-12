@@ -13,7 +13,7 @@ interface SimpleCustomerRepository {
 
   fun update(customer: Customer): Mono<Customer>
 
-  fun findById(id: Int): Mono<Customer>
+  fun findById(id: String): Mono<Customer>
 
-  fun deleteById(id: Int): Mono<Void>
+  fun deleteById(id: String): Mono<Void>
 }

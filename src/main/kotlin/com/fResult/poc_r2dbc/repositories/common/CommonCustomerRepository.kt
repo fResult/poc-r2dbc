@@ -18,7 +18,8 @@ class CommonCustomerRepository(
   private val environment: Environment,
 ) : SimpleCustomerRepository {
 
-  private val rowMapper: (Map<String, Any>) -> Customer = { row -> Customer(row["id"] as Int, row["email"] as String) }
+  private val rowMapper: (Map<String, Any>) -> Customer =
+    { row -> Customer((row["id"] as Int).toString(), row["email"] as String) }
 
   companion object {
     private val log: Logger = LogManager.getLogger(CustomerRepository::class.java)
@@ -44,7 +45,7 @@ class CommonCustomerRepository(
       .filter { stmt, _ -> stmt.returnGeneratedValues("id").execute() }
       .fetch()
       .first()
-      .flatMap { findById(it["id"] as Int) }
+      .flatMap { (it["id"] as Int).toString().let(::findById) }
   }
 
   override fun findAll(): Flux<Customer> =
@@ -54,24 +55,24 @@ class CommonCustomerRepository(
       .`as` { it.map(rowMapper) }
 
   override fun update(customer: Customer): Mono<Customer> =
-    dbClient.sql("UPDATE customer SET email = $2 WHERE id = $1")
-      .bind("$1", customer.id!!)
-      .bind("$2", customer.email)
+    dbClient.sql("UPDATE customer SET email = :email WHERE id = CAST(:id AS INTEGER)")
+      .bind("id", customer.id!!)
+      .bind("email", customer.email)
       .fetch()
       .first()
       .switchIfEmpty(Mono.empty())
       .then(findById(customer.id))
 
-  override fun findById(id: Int): Mono<Customer> =
-    dbClient.sql("SELECT * FROM customer WHERE id = $1")
-      .bind("$1", id)
+  override fun findById(id: String): Mono<Customer> =
+    dbClient.sql("SELECT * FROM customer WHERE id = CAST(:id AS INTEGER)")
+      .bind("id", id)
       .fetch()
       .first()
       .map(rowMapper)
 
-  override fun deleteById(id: Int): Mono<Void> =
-    dbClient.sql("DELETE FROM customer WHERE id = $1")
-      .bind("$1", id)
+  override fun deleteById(id: String): Mono<Void> =
+    dbClient.sql("DELETE FROM customer WHERE id = CAST(:id AS INTEGER)")
+      .bind("id", id)
       .fetch()
       .rowsUpdated()
       .then()
