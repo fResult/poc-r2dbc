@@ -1,5 +1,6 @@
 package com.fResult.poc_r2dbc
 
+import com.fResult.poc_r2dbc.entities.Customer
 import com.fResult.poc_r2dbc.repositories.common.SimpleCustomerRepository
 import org.junit.jupiter.api.Test
 import org.springframework.test.context.DynamicPropertyRegistry
@@ -103,7 +104,7 @@ abstract class BaseCustomerRepositoryTest {
 
     StepVerifier.create(
       repository.findAll()
-        .map { Customer(it.id!!, it.email.lowercase())}
+        .map { Customer(it.id!!, it.email.lowercase()) }
         .flatMap(repository::update)
     )
       .expectNextMatches { it.email == email.lowercase() }

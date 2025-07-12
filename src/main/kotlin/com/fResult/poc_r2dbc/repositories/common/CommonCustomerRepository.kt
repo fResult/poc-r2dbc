@@ -1,6 +1,6 @@
 package com.fResult.poc_r2dbc.repositories.common
 
-import com.fResult.poc_r2dbc.Customer
+import com.fResult.poc_r2dbc.entities.Customer
 import com.fResult.poc_r2dbc.repositories.springdata.CustomerRepository
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger

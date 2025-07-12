@@ -1,6 +1,6 @@
 package com.fResult.poc_r2dbc.repositories.common
 
-import com.fResult.poc_r2dbc.Customer
+import com.fResult.poc_r2dbc.entities.Customer
 import org.springframework.data.repository.NoRepositoryBean
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono

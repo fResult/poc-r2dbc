@@ -1,4 +1,4 @@
-package com.fResult.poc_r2dbc
+package com.fResult.poc_r2dbc.entities
 
 import org.springframework.data.annotation.Id
 

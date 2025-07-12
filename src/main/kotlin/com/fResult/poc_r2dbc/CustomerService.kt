@@ -1,5 +1,6 @@
 package com.fResult.poc_r2dbc
 
+import com.fResult.poc_r2dbc.entities.Customer
 import com.fResult.poc_r2dbc.repositories.common.SimpleCustomerRepository
 import org.reactivestreams.Publisher
 import org.springframework.beans.factory.annotation.Qualifier

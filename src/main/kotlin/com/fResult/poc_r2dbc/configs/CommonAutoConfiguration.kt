@@ -1,6 +1,6 @@
 package com.fResult.poc_r2dbc.configs
 
-import com.fResult.poc_r2dbc.Customer
+import com.fResult.poc_r2dbc.entities.Customer
 import com.fResult.poc_r2dbc.CustomerDatabaseInitializer
 import com.fResult.poc_r2dbc.CustomerService
 import com.fResult.poc_r2dbc.repositories.common.SimpleCustomerRepository

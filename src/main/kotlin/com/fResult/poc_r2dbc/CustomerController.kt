@@ -1,5 +1,6 @@
 package com.fResult.poc_r2dbc
 
+import com.fResult.poc_r2dbc.entities.Customer
 import com.fResult.poc_r2dbc.repositories.common.SimpleCustomerRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
