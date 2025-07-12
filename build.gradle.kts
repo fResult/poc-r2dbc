@@ -20,12 +20,15 @@ repositories {
 	maven { url = uri("https://repo.spring.io/snapshot") }
 }
 
+val log4jVersion = "3.0.0-beta3"
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.apache.logging.log4j:log4j-bom:$log4jVersion")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")

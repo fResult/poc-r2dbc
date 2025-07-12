@@ -1,8 +1,12 @@
 spring:
   profiles:
     default: common
+
   main:
     allow-bean-definition-overriding: true
+  config:
+    activate:
+      on-profile:
 
 #logging:
 #  level:

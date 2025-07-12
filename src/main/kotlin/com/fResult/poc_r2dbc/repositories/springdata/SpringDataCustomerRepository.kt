@@ -2,7 +2,10 @@ package com.fResult.poc_r2dbc.repositories.springdata
 
 import com.fResult.poc_r2dbc.Customer
 import com.fResult.poc_r2dbc.repositories.common.SimpleCustomerRepository
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import org.springframework.context.annotation.Profile
+import org.springframework.core.env.Environment
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -11,8 +14,27 @@ import reactor.core.publisher.Mono
 @Profile("springdata")
 class SpringDataCustomerRepository(
   private val repository: CustomerRepository,
-) :
-  SimpleCustomerRepository {
+  private val environment: Environment,
+) : SimpleCustomerRepository {
+
+  companion object {
+    val log: Logger = LogManager.getLogger(SpringDataCustomerRepository::class.java)
+  }
+
+  init {
+    (environment.activeProfiles
+      .takeIf(Array<out String>::isNotEmpty)
+      ?.joinToString()
+      ?: "common")
+      .also { profile ->
+        log.info(
+          "[{}] initialized with profile: [{}]",
+          SpringDataCustomerRepository::class.simpleName,
+          profile
+        )
+      }
+  }
+
   override fun save(customer: Customer): Mono<Customer> = repository.save(customer)
 
   override fun findAll(): Flux<Customer> = repository.findAll()

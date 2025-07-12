@@ -7,15 +7,22 @@ import com.fResult.poc_r2dbc.repositories.springdata.SpringDataCustomerRepositor
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
+import org.springframework.core.env.Environment
 import org.springframework.r2dbc.core.DatabaseClient
 
 @Configuration
 class CustomerRepositoryConfiguration {
   @Bean
   @Profile("common")
-  fun commonCustomerRepository(dbClient: DatabaseClient): SimpleCustomerRepository = CommonCustomerRepository(dbClient)
+  fun commonCustomerRepository(
+    dbClient: DatabaseClient,
+    environment: Environment,
+  ): SimpleCustomerRepository = CommonCustomerRepository(dbClient, environment)
 
   @Bean
   @Profile("springdata")
-  fun springDataCustomerRepository(repository: CustomerRepository): SimpleCustomerRepository =  SpringDataCustomerRepository(repository)
+  fun springDataCustomerRepository(
+    repository: CustomerRepository,
+    environment: Environment,
+  ): SimpleCustomerRepository = SpringDataCustomerRepository(repository, environment)
 }
