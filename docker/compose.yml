@@ -11,5 +11,23 @@ services:
       - 'POSTGRES_PASSWORD=${PG_PASSWORD}'
     ports:
       - '5433:5432'
-#    volumes:
-#      - ./docker/init:/docker-entrypoint-initdb.d
+  #    volumes:
+  #      - ./docker/init:/docker-entrypoint-initdb.d
+
+  kotlin-reactive-mongodb:
+    image: mongo:8.0-rc-noble
+    container_name: reactive-mongo-orders-db
+    env_file:
+      - ../.env # When run docker-compose from current directory
+    environment:
+      - 'MONGO_INITDB_DATABASE=orders'
+      - 'MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}'
+      - 'MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}'
+    ports:
+      - '27017:27017'
+
+#volumes:
+#  r2dbc-orders-db:
+#    driver: local
+#  reactive-mongo-orders-db:
+#    driver: local

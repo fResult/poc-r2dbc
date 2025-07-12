@@ -1,10 +1,14 @@
 spring:
   application:
     name: POC R2DBC (MongoDB)
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5433/orders
-    username: ${PG_USER}
-    password: ${PG_PASSWORD}
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      port: 27017
+      database: orders
+      username: ${MONGO_USER}
+      password: ${MONGO_PASSWORD}
+      authentication-database: admin
   sql:
     init:
       data-locations: classpath:schema.sql
