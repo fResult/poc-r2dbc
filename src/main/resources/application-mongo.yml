@@ -8,12 +8,12 @@ spring:
   data:
     mongodb:
       host: localhost
-#      uri: mongodb://localhost
+#      uri: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@localhost:27017/orders
       port: 27017
       database: orders
       username: ${MONGO_USER}
       password: ${MONGO_PASSWORD}
-      authentication-database: mongo #${MONGO_AUTH_DB}
+      authentication-database: ${MONGO_AUTH_DB}
   sql:
     init:
       data-locations: classpath:schema.sql
