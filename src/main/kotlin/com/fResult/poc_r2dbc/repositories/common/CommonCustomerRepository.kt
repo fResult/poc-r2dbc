@@ -40,8 +40,8 @@ class CommonCustomerRepository(
   }
 
   override fun save(customer: Customer): Mono<Customer> {
-    return dbClient.sql("INSERT INTO customer ( email ) values ( $1 )")
-      .bind("$1", customer.email)
+    return dbClient.sql("INSERT INTO customer ( email ) values ( :email )")
+      .bind("email", customer.email)
       .filter { stmt, _ -> stmt.returnGeneratedValues("id").execute() }
       .fetch()
       .first()
