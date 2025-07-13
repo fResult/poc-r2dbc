@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: POC R2DBC (Mongo)
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5433/orders
+    username: ${PG_USER}
+    password: ${PG_PASSWORD}
+  data:
+    mongodb:
+      host: localhost
+#      uri: mongodb://localhost
+      port: 27017
+      database: orders
+      username: ${MONGO_USER}
+      password: ${MONGO_PASSWORD}
+      authentication-database: mongo #${MONGO_AUTH_DB}
+  sql:
+    init:
+      data-locations: classpath:schema.sql
+      mode: always

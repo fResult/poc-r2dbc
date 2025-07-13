@@ -3,7 +3,6 @@ package com.fResult.poc_r2dbc
 import com.fResult.poc_r2dbc.entities.Customer
 import com.fResult.poc_r2dbc.repositories.common.SimpleCustomerRepository
 import org.reactivestreams.Publisher
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 import org.springframework.transaction.reactive.TransactionalOperator
 import reactor.core.publisher.Flux
@@ -16,6 +15,7 @@ class CustomerService(
   private val operator: TransactionalOperator,
   private val dbInitializer: CustomerDatabaseInitializer,
 ) {
+
   fun resetDatabase(): Publisher<Void> = dbInitializer.resetCustomerTable()
 
   fun upsert(email: String): Flux<Customer> {
