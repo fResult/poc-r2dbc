@@ -21,6 +21,13 @@ repositories {
 }
 
 val log4jVersion = "3.0.0-beta3"
+val testcontainersVersion = "1.21.3"
+
+dependencyManagement {
+	imports {
+		mavenBom("org.testcontainers:testcontainers-bom:$testcontainersVersion")
+	}
+}
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -43,6 +50,7 @@ dependencies {
 	testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
 	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("org.testcontainers:postgresql")
+	testImplementation("org.testcontainers:mongodb")
 	testImplementation("org.testcontainers:r2dbc")
 
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
