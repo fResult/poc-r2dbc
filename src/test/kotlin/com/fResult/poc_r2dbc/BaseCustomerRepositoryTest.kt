@@ -1,7 +1,7 @@
 package com.fResult.poc_r2dbc
 
 import com.fResult.poc_r2dbc.entities.Customer
-import com.fResult.poc_r2dbc.repositories.common.SimpleCustomerRepository
+import com.fResult.poc_r2dbc.repositories.common.CommonCustomerRepository
 import org.junit.jupiter.api.Test
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
@@ -12,7 +12,7 @@ import reactor.test.StepVerifier
 
 @Testcontainers
 abstract class BaseCustomerRepositoryTest {
-  abstract fun getRepository(): SimpleCustomerRepository
+  abstract fun getRepository(): CommonCustomerRepository
 
 //  @Autowired
 //  private lateinit var initializer: CustomerDatabaseInitializer
@@ -37,9 +37,9 @@ abstract class BaseCustomerRepositoryTest {
       .flatMap { repository.findById(it.id!!) }
       .thenMany(
         Flux.just(
-          Customer(null, "first@email.com"),
-          Customer(null, "second@email.com"),
-          Customer(null, "third@email.com"),
+          Customer("first@email.com"),
+          Customer("second@email.com"),
+          Customer("third@email.com"),
         )
       )
       .flatMap(repository::save)
@@ -54,9 +54,9 @@ abstract class BaseCustomerRepositoryTest {
   fun `save and find all`() {
     val repository = getRepository()
     val customers = Flux.just(
-      Customer(null, "first@email.com"),
-      Customer(null, "second@email.com"),
-      Customer(null, "third@email.com"),
+      Customer("first@email.com"),
+      Customer("second@email.com"),
+      Customer("third@email.com"),
     )
       .flatMap(repository::save)
 
@@ -70,9 +70,9 @@ abstract class BaseCustomerRepositoryTest {
   fun `find by id`() {
     val repository = getRepository()
     var customers = Flux.just(
-      Customer(null, "first@email.com"),
-      Customer(null, "second@email.com"),
-      Customer(null, "third@email.com"),
+      Customer("first@email.com"),
+      Customer("second@email.com"),
+      Customer("third@email.com"),
     )
       .flatMap(repository::save)
 
