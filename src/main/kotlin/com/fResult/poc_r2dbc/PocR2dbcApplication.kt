@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class PocR2dbcApplication
 
 fun main(args: Array<String>) {
-	runApplication<PocR2dbcApplication>(*args)
+  runApplication<PocR2dbcApplication>(*args)
 }
