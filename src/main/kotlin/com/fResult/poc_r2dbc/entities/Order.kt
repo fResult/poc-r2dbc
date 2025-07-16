@@ -4,4 +4,6 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document
-data class Order(@Id val id: String, val productId: String)
+data class Order(@Id val id: String?, val productId: String) {
+  constructor(productId: String) : this(null, productId)
+}
