@@ -16,8 +16,8 @@ class OrderService(private val template: ReactiveMongoTemplate, private val oper
 
   fun buildOrderFlux(
     createOrder: (Order) -> Mono<Order>,
-    orderIds: Array<out String>
-  ): Flux<Order> = Flux.just(*orderIds)
+    productIds: Array<out String>
+  ): Flux<Order> = Flux.just(*productIds)
     .doOnEach { orderIdSignal ->
       Assertions.notNull(orderIdSignal.get(), "Order ID must not be null")
     }
