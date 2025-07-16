@@ -1,4 +1,4 @@
-package com.fResult.poc_r2dbc
+package com.fResult.poc_r2dbc.controllers
 
 import com.fResult.poc_r2dbc.entities.Customer
 import com.fResult.poc_r2dbc.repositories.common.SimpleCustomerRepository
@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono
 import java.net.URI
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/rc/customers")
 class CustomerController(private val repository: SimpleCustomerRepository) {
   @GetMapping
   fun all(): Flux<Customer> {
