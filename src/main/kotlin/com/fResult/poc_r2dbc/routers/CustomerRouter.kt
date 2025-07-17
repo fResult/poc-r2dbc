@@ -13,6 +13,7 @@ class CustomerRouter(private val handler: CustomerHandler) {
       GET("", handler::all)
       GET("/{id}", handler::byId)
       POST("", handler::create)
+      PATCH("/{id}", handler::update)
     }
   }
 }

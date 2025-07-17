@@ -1,5 +1,6 @@
 package com.fResult.poc_r2dbc.handlers
 
+import com.fResult.poc_r2dbc.CustomerUpdateRequest
 import com.fResult.poc_r2dbc.entities.Customer
 import com.fResult.poc_r2dbc.repositories.mongodb.CustomerRepository
 import kotlinx.coroutines.reactor.awaitSingle
@@ -28,4 +29,16 @@ class CustomerHandler(private val repository: CustomerRepository) {
       .flatMap(repository::save)
       .flatMap { ServerResponse.created(URI.create("/customers/${it.id}")).bodyValue(it) }
       .awaitSingle()
+
+  suspend fun update(request: ServerRequest): ServerResponse {
+    val id = request.pathVariable("id")
+    return request.bodyToMono<CustomerUpdateRequest>()
+      .zipWith(repository.findById(id)) { body, existing ->
+        Customer(existing.id, body.email ?: existing.email)
+      }
+      .map { existing -> Customer(existing.id, existing.email) }
+      .flatMap(repository::save)
+      .flatMap { ServerResponse.ok().bodyValue(it) }
+      .awaitSingle()
+  }
 }
