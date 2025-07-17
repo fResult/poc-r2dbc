@@ -11,6 +11,7 @@ class CustomerRouter(private val handler: CustomerHandler) {
   fun customerRoutes() = coRouter {
     "/fe/customers".nest {
       GET("", handler::all)
+      GET("/{id}", handler::byId)
       POST("", handler::create)
     }
   }

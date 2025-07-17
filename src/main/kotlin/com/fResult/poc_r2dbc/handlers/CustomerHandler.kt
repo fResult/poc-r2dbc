@@ -16,6 +16,13 @@ class CustomerHandler(private val repository: CustomerRepository) {
       .collectList()
       .flatMap { ServerResponse.ok().bodyValue(it) }.awaitSingle()
 
+  suspend fun byId(request: ServerRequest): ServerResponse =
+    request.pathVariable("id")
+      .let { repository.findById(it) }
+      .flatMap { ServerResponse.ok().bodyValue(it) }
+      .switchIfEmpty(ServerResponse.notFound().build())
+      .awaitSingle()
+
   suspend fun create(request: ServerRequest): ServerResponse =
     request.bodyToMono<Customer>()
       .flatMap(repository::save)
