@@ -33,13 +33,15 @@ class CustomerHandler(private val repository: CustomerRepository) {
 
   suspend fun update(request: ServerRequest): ServerResponse {
     val id = request.pathVariable("id")
+
     return request.bodyToMono<CustomerUpdateRequest>()
       .zipWith(repository.findById(id)) { body, existing ->
         Customer(existing.id, body.email ?: existing.email)
       }
       .map { existing -> Customer(existing.id, existing.email) }
       .flatMap(repository::save)
-      .flatMap { ServerResponse.ok().bodyValue(it) }
+      .flatMap(ServerResponse.ok()::bodyValue)
+      .awaitSingle()
   }
 
   suspend fun deleteById(request: ServerRequest): ServerResponse {
