@@ -11,6 +11,11 @@ import java.net.URI
 
 @Component
 class CustomerHandler(private val repository: CustomerRepository) {
+  suspend fun all(request: ServerRequest): ServerResponse =
+    repository.findAll()
+      .collectList()
+      .flatMap { ServerResponse.ok().bodyValue(it) }.awaitSingle()
+
   suspend fun create(request: ServerRequest): ServerResponse =
     request.bodyToMono<Customer>()
       .flatMap(repository::save)

@@ -10,6 +10,7 @@ class CustomerRouter(private val handler: CustomerHandler) {
   @Bean
   fun customerRoutes() = coRouter {
     "/fe/customers".nest {
+      GET("", handler::all)
       POST("", handler::create)
     }
   }
