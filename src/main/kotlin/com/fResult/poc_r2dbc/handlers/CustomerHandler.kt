@@ -16,7 +16,8 @@ class CustomerHandler(private val repository: CustomerRepository) {
   suspend fun all(request: ServerRequest): ServerResponse =
     repository.findAll()
       .collectList()
-      .flatMap { ServerResponse.ok().bodyValue(it) }.awaitSingle()
+      .flatMap(ServerResponse.ok()::bodyValue)
+      .awaitSingle()
 
   suspend fun byId(request: ServerRequest): ServerResponse =
     request.pathVariable("id")
