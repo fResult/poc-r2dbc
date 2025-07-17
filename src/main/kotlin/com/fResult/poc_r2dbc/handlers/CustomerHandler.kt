@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyToMono
+import reactor.kotlin.core.publisher.toMono
 import java.net.URI
 
 @Component
@@ -39,6 +40,13 @@ class CustomerHandler(private val repository: CustomerRepository) {
       .map { existing -> Customer(existing.id, existing.email) }
       .flatMap(repository::save)
       .flatMap { ServerResponse.ok().bodyValue(it) }
+  }
+
+  suspend fun deleteById(request: ServerRequest): ServerResponse {
+    return request.pathVariable("id")
+      .toMono()
+      .flatMap(repository::deleteById)
+      .then(ServerResponse.noContent().build())
       .awaitSingle()
   }
 }
