@@ -20,7 +20,7 @@ class CustomerHandler(private val repository: CustomerRepository) {
 
   suspend fun byId(request: ServerRequest): ServerResponse =
     request.pathVariable("id")
-      .let { repository.findById(it) }
+      .let(repository::findById)
       .flatMap(ServerResponse.ok()::bodyValue)
       .switchIfEmpty(ServerResponse.notFound().build())
       .awaitSingle()
