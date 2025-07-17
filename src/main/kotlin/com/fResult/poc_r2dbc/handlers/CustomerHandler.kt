@@ -11,7 +11,7 @@ import java.net.URI
 
 @Component
 class CustomerHandler(private val repository: CustomerRepository) {
-  suspend fun createCustomer(request: ServerRequest): ServerResponse =
+  suspend fun create(request: ServerRequest): ServerResponse =
     request.bodyToMono<Customer>()
       .flatMap(repository::save)
       .flatMap { ServerResponse.created(URI.create("/customers/${it.id}")).bodyValue(it) }
