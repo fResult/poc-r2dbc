@@ -82,6 +82,12 @@ export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
 curl http://localhost:8089/fe/customers
 ```
 
+**Get Customer by ID:**
+
+```bash
+curl http://localhost:8089/fe/customers/:id
+```
+
 ### Rest Controller (`/rc/...`)
 
 **Get All Customers:**
