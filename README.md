@@ -95,3 +95,9 @@ curl http://localhost:8089/fe/customers/:id
 ```bash
 curl http://localhost:8089/rc/customers
 ```
+
+**Get Customer by ID:**
+
+```bash
+curl http://localhost:8089/fe/customers/:id
+```
