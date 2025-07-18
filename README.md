@@ -88,6 +88,14 @@ curl http://localhost:8089/fe/customers
 curl http://localhost:8089/fe/customers/:id
 ```
 
+**Create Customer:**
+
+```bash
+curl -X POST http://localhost:8089/fe/customers \
+     -H "Content-Type: application/json" \
+     -d '{"email": "john.d@example.com"}'
+```
+
 ### Rest Controller (`/rc/...`)
 
 **Get All Customers:**
