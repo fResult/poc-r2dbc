@@ -109,3 +109,11 @@ curl http://localhost:8089/rc/customers
 ```bash
 curl http://localhost:8089/fe/customers/:id
 ```
+
+**Create Customer:**
+
+```bash
+curl -X POST http://localhost:8089/rc/customers \
+     -H "Content-Type: application/json" \
+     -d '{"email": "john.d@example.com"}'
+```
