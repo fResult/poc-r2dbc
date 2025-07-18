@@ -79,27 +79,27 @@ export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
 **Get All Customers:**
 
 ```bash
-curl http://localhost:8089/fe/customers
+curl localhost:8089/fe/customers
 ```
 
 **Get Customer by ID:**
 
 ```bash
-curl http://localhost:8089/fe/customers/:id
+curl localhost:8089/fe/customers/:id
 ```
 
 **Create Customer:**
 
 ```bash
-curl -X POST http://localhost:8089/fe/customers \
+curl -X POST localhost:8089/fe/customers \
      -H "Content-Type: application/json" \
-     -d '{"email": "john.d@example.com"}'
+     -d '{"email": "<email_to_create>"}'
 ```
 
 **Update Customer:**
 
 ```bash
-curl -X PATCH http://localhost:8089/fe/customers/:id \
+curl -X PATCH localhost:8089/fe/customers/:id \
      -H "Content-Type: application/json" \
      -d '{"email": "<email_to_update>"}'
 ```
@@ -107,7 +107,7 @@ curl -X PATCH http://localhost:8089/fe/customers/:id \
 **Delete Customer:**
 
 ```bash
-curl -X DELETE http://localhost:8089/fe/customers/:id
+curl -X DELETE localhost:8089/fe/customers/:id
 ```
 
 ### Rest Controller (`/rc/...`)
@@ -115,27 +115,27 @@ curl -X DELETE http://localhost:8089/fe/customers/:id
 **Get All Customers:**
 
 ```bash
-curl http://localhost:8089/rc/customers
+curl localhost:8089/rc/customers
 ```
 
 **Get Customer by ID:**
 
 ```bash
-curl http://localhost:8089/fe/customers/:id
+curl localhost:8089/fe/customers/:id
 ```
 
 **Create Customer:**
 
 ```bash
-curl -X POST http://localhost:8089/rc/customers \
+curl -X POST localhost:8089/rc/customers \
      -H "Content-Type: application/json" \
-     -d '{"email": "john.d@example.com"}'
+     -d '{"email": "<email_to_create>"}'
 ```
 
 **Update Customer:**
 
 ```bash
-curl -X PATCH http://localhost:8089/rc/customers/:id \
+curl -X PATCH localhost:8089/rc/customers/:id \
      -H "Content-Type: application/json" \
      -d '{"email": "<email_to_update>"}'
 ```
@@ -143,5 +143,5 @@ curl -X PATCH http://localhost:8089/rc/customers/:id \
 **Delete Customer:**
 
 ```bash
-curl -X DELETE http://localhost:8089/rc/customers/:id
+curl -X DELETE localhost:8089/rc/customers/:id
 ```
