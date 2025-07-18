@@ -125,3 +125,11 @@ curl -X POST http://localhost:8089/rc/customers \
      -H "Content-Type: application/json" \
      -d '{"email": "john.d@example.com"}'
 ```
+
+**Update Customer:**
+
+```bash
+curl -X PATCH http://localhost:8089/rc/customers/:id \
+     -H "Content-Type: application/json" \
+     -d '{"email": "<email_to_update>"}'
+```
