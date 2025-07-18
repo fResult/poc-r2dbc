@@ -71,3 +71,21 @@ export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE="$HOME//.colima/default/docker.sock
 export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j | jq -r '.address')
 export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
 ```
+
+## Endpoints
+
+### Functional Endpoints (`/fe/...`)
+
+**Get All Customers:**
+
+```bash
+curl http://localhost:8089/fe/customers
+```
+
+### Rest Controller (`/rc/...`)
+
+**Get All Customers:**
+
+```bash
+curl http://localhost:8089/rc/customers
+```
