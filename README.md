@@ -139,3 +139,9 @@ curl -X PATCH http://localhost:8089/rc/customers/:id \
      -H "Content-Type: application/json" \
      -d '{"email": "<email_to_update>"}'
 ```
+
+**Delete Customer:**
+
+```bash
+curl -X DELETE http://localhost:8089/rc/customers/:id
+```
