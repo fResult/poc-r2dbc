@@ -104,6 +104,12 @@ curl -X PATCH http://localhost:8089/fe/customers/:id \
      -d '{"email": "<email_to_update>"}'
 ```
 
+**Delete Customer:**
+
+```bash
+curl -X DELETE http://localhost:8089/fe/customers/:id
+```
+
 ### Rest Controller (`/rc/...`)
 
 **Get All Customers:**
