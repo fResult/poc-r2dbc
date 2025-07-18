@@ -72,7 +72,7 @@ export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j | jq -r '.address')
 export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
 ```
 
-## Endpoints
+## API Endpoints
 
 ### Functional Endpoints (`/fe/...`)
 
