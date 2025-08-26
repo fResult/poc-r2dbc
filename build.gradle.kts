@@ -1,7 +1,7 @@
 plugins {
 	kotlin("jvm") version "2.2.0"
 	kotlin("plugin.spring") version "2.2.0"
-	id("org.springframework.boot") version "4.0.0-SNAPSHOT"
+	id("org.springframework.boot") version "4.0.0-M2"
 	id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -63,5 +63,10 @@ kotlin {
 }
 
 tasks.withType<Test> {
+//	val home = System.getenv("HOME")
+
+//	environment("TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE", "$home/.colima/default/docker.sock")
+//	environment("DOCKER_HOST", "unix://$home/.colima/default/docker.sock")
+//	environment("DOCKER_HOST", "192.168.106.4")
 	useJUnitPlatform()
 }
