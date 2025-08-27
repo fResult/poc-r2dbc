@@ -21,6 +21,7 @@ abstract class BaseCustomerRepositoryTest {
 //  private lateinit var resource: Resource
 
   companion object {
+    @JvmStatic
     @DynamicPropertySource
     fun registerProperties(registry: DynamicPropertyRegistry) {
       registry.add("spring.sql.init.mode") { "always" }
