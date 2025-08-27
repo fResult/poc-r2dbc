@@ -63,10 +63,6 @@ kotlin {
 }
 
 tasks.withType<Test> {
-//	val home = System.getenv("HOME")
-
-//	environment("TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE", "$home/.colima/default/docker.sock")
-//	environment("DOCKER_HOST", "unix://$home/.colima/default/docker.sock")
-//	environment("DOCKER_HOST", "192.168.106.4")
+	environment("TESTCONTAINERS_RYUK_DISABLED", "true") // Disable Ryuk container for tests
 	useJUnitPlatform()
 }
