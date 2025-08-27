@@ -17,13 +17,13 @@ class MongoConfiguration(private val mongoProps: MongoProperties) {
   fun mongoClient(): MongoClient {
     val credential =
       MongoCredential.createCredential(
-        mongoProps.username,
-        mongoProps.authenticationDatabase,
-        mongoProps.password,
+        mongoProps.username!!,
+        mongoProps.authenticationDatabase!!,
+        mongoProps.password!!,
       )
     val settings = MongoClientSettings.builder()
       .applyToClusterSettings {
-        ServerAddress(mongoProps.host, mongoProps.port)
+        ServerAddress(mongoProps.host, mongoProps.port!!)
           .let(ServerAddress::toList)
           .let(it::hosts)
       }
@@ -36,6 +36,6 @@ class MongoConfiguration(private val mongoProps: MongoProperties) {
 
   @Bean
   fun reactiveMongoTemplate(mongoClient: MongoClient): ReactiveMongoTemplate {
-    return ReactiveMongoTemplate(mongoClient, mongoProps.database)
+    return ReactiveMongoTemplate(mongoClient, mongoProps.database!!)
   }
 }
