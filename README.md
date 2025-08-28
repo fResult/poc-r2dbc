@@ -11,6 +11,18 @@ This repository serves as a proof of concept (POC) to explore and test the R2DBC
 
 ## Running the Project
 
+### Start Databases
+
+```bash
+docker-compose -f docker/compose.yml --env-file .env up -d
+```
+
+To stop the databases:
+
+```bash
+docker-compose -f docker/compose.yml --env-file .env down -v
+```
+
 ### Build
 
 ```bash
@@ -67,7 +79,7 @@ Ref: https://java.testcontainers.org/supported_docker_environment/#colima
 
 ```bash
 colima start --network-address
-export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE="$HOME//.colima/default/docker.sock"
+export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE="$HOME/.colima/default/docker.sock"
 export TESTCONTAINERS_HOST_OVERRIDE=$(colima ls -j | jq -r '.address')
 export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
 ```
@@ -121,7 +133,7 @@ curl localhost:8089/rc/customers
 **Get Customer by ID:**
 
 ```bash
-curl localhost:8089/fe/customers/:id
+curl localhost:8089/rc/customers/:id
 ```
 
 **Create Customer:**
