@@ -9,12 +9,15 @@ import com.mongodb.reactivestreams.client.MongoClients
 import org.springframework.boot.mongodb.autoconfigure.MongoProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
+import org.springframework.context.annotation.Profile
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 
 @Configuration
-class MongoConfiguration(private val mongoProps: MongoProperties) {
+@Profile("mongo")
+class MongoConfiguration() {
   @Bean
-  fun mongoClient(): MongoClient {
+  fun mongoClient(mongoProps: MongoProperties): MongoClient {
     val credential =
       MongoCredential.createCredential(
         mongoProps.username!!,
@@ -35,7 +38,11 @@ class MongoConfiguration(private val mongoProps: MongoProperties) {
   }
 
   @Bean
-  fun reactiveMongoTemplate(mongoClient: MongoClient): ReactiveMongoTemplate {
+  @Primary
+  fun mongoProps(): MongoProperties = MongoProperties()
+
+  @Bean
+  fun reactiveMongoTemplate(mongoClient: MongoClient, mongoProps: MongoProperties): ReactiveMongoTemplate {
     return ReactiveMongoTemplate(mongoClient, mongoProps.database!!)
   }
 }
